@@ -1,2 +1,2 @@
 # Succint
-App that allows users to leverage AI to help them break down larger tasks
+An app that allows users to leverage AI to break down complex tasks
