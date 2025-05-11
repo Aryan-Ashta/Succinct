@@ -1,0 +1,9 @@
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/build/generated/compose/resourceGenerator/kotlin/commonMainResourceCollectors/succint/composeapp/generated/resources/ExpectResourceCollectors.kt
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/build/generated/compose/resourceGenerator/kotlin/commonResClass/succint/composeapp/generated/resources/Res.kt
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/src/androidMain/kotlin/org/aryanashta/succint/Platform.android.kt
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/build/generated/compose/resourceGenerator/kotlin/commonMainResourceAccessors/succint/composeapp/generated/resources/Drawable0.commonMain.kt
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/build/generated/compose/resourceGenerator/kotlin/androidMainResourceCollectors/succint/composeapp/generated/resources/ActualResourceCollectors.kt
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/src/androidMain/kotlin/org/aryanashta/succint/MainActivity.kt
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/src/commonMain/kotlin/org/aryanashta/succint/App.kt
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/src/commonMain/kotlin/org/aryanashta/succint/Greeting.kt
+/Users/aryanashta/Documents/GitHub/Succint/composeApp/src/commonMain/kotlin/org/aryanashta/succint/Platform.kt
