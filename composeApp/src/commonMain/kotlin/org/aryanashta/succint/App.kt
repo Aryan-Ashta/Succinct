@@ -34,7 +34,7 @@ fun App() {
         var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "Today's date is ${todaysDate()}",
+                text = "Today's date is ${todayDate()}",
                 modifier = Modifier.padding(20.dp),
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center
@@ -53,7 +53,7 @@ fun App() {
     }
 }
 @OptIn(ExperimentalTime::class)
-fun todaysDate(): String {
+fun todayDate(): String {
     fun LocalDateTime.format() = toString().substringBefore('T')
 
     val now: Instant = Clock.System.now()
