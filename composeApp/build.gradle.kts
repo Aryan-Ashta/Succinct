@@ -69,6 +69,16 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
+
+            implementation("io.ktor:ktor-client-core:3.1.3")
+            implementation("io.ktor:ktor-client-cio:3.1.3")
+
+
+            implementation(project.dependencies.platform("io.github.jan-tennert.supabase:bom:3.1.4"))
+            implementation("io.github.jan-tennert.supabase:postgrest-kt")
+            implementation("io.ktor:ktor-client-android:3.1.3")
+
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -76,6 +86,7 @@ kotlin {
         }
         wasmJsMain.dependencies {
             implementation(npm("@js-joda/timezone", "2.3.0"))
+
         }
     }
 }
@@ -109,14 +120,6 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
-
-    implementation("io.ktor:ktor-client-core:3.1.3")
-    implementation("io.ktor:ktor-client-cio:3.1.3")
-
-
-    implementation(platform("io.github.jan-tennert.supabase:bom:3.1.4"))
-    implementation("io.github.jan-tennert.supabase:postgrest-kt")
-    implementation("io.ktor:ktor-client-android:3.1.3")
 }
 
 compose.desktop {
