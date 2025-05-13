@@ -50,49 +50,11 @@ fun App() {
         ) {}
     }
 }
-@Composable
-fun SignUpButton(onClick: () -> Unit, email: String, password: String) {
-    val coroutineScope = rememberCoroutineScope()
 
-    Button(
-        onClick = {
-            coroutineScope.launch {
-                newUser(email, password)
-            }
-        }
-    ) {
-        Text("Sign Up")
-    }
-}
-suspend fun newUser(email: String, password: String) {
-    val user = supabase.auth.signUpWith(io.github.jan.supabase.auth.providers.builtin.Email) {
-        this.email = email
-        this.password = password
 
-    }
-}
 
-@Composable
-fun LogInButton(onClick: () -> Unit, email: String, password: String) {
-    val coroutineScope = rememberCoroutineScope()
 
-    Button(
-        onClick = {
-            coroutineScope.launch {
-                logIn(email, password)
-            }
-        }
-    ) {
-        Text("Log In")
-    }
-}
 
-suspend fun logIn(email: String, password: String) {
-    val user = supabase.auth.signInWith(io.github.jan.supabase.auth.providers.builtin.Email) {
-        this.email = email
-        this.password = password
-    }
-}
 @OptIn(ExperimentalTime::class)
 fun todayDate(): String {
     fun LocalDateTime.format() = toString().substringBefore('T')
