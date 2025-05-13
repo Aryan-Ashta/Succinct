@@ -37,15 +37,7 @@ import succint.composeapp.generated.resources.compose_multiplatform
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlin.time.ExperimentalTime
-val supabase = createSupabaseClient(
-    supabaseUrl = "https://zwqhugfnfydnxcrjbmqa.supabase.co",
-    supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3cWh1Z2ZuZnlkbnhjcmpibXFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY5NzU3NDEsImV4cCI6MjA2MjU1MTc0MX0.PxuguiXpcyxKMV3T5nY6A6ynzBF3ApM8asi7ZL7Ng4I"
-) {
-    install(Auth){
 
-    }
-    install(Postgrest)
-}
 @Composable
 @Preview
 fun App() {
@@ -55,30 +47,7 @@ fun App() {
         Column(
             modifier = Modifier.fillMaxWidth().padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            var email by remember { mutableStateOf("") }
-            var password by remember { mutableStateOf("") }
-
-            Text("Welcome to Succint, signup below", fontSize = 24.sp, textAlign = TextAlign.Center)
-
-            TextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") }
-            )
-            TextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") }
-            )
-            SignUpButton(onClick = {
-                showContent = true
-            }, email = email, password = password)
-            LogInButton(onClick = {
-                showContent = true
-            }, email = email, password = password)
-
-        }
+        ) {}
     }
 }
 @Composable
