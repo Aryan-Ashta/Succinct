@@ -1,0 +1,8 @@
+import normalizeColor from "@tamagui/normalize-css-color";
+const processColor = color => {
+  if (color == null) return color;
+  let int32Color = normalizeColor(color);
+  if (int32Color != null) return int32Color = (int32Color << 24 | int32Color >>> 8) >>> 0, int32Color;
+};
+export { processColor };
+//# sourceMappingURL=index.mjs.map

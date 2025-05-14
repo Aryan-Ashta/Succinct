@@ -1,0 +1,3 @@
+import { simpleHash } from "@tamagui/simple-hash";
+export { simpleHash as default };
+//# sourceMappingURL=hash.mjs.map

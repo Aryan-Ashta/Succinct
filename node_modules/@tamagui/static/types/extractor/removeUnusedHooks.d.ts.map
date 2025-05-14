@@ -1,0 +1,1 @@
+{"version":3,"file":"removeUnusedHooks.d.ts","sourceRoot":"","sources":["../../src/extractor/removeUnusedHooks.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,QAAQ,EAAE,MAAM,iBAAiB,CAAA;AAQ/C,wBAAgB,iBAAiB,CAC/B,MAAM,EAAE,QAAQ,CAAC,GAAG,CAAC,EACrB,gBAAgB,EAAE,OAAO,GAAG,SAAS,QAwEtC"}

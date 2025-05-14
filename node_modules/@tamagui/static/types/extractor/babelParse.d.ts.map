@@ -1,0 +1,1 @@
+{"version":3,"file":"babelParse.d.ts","sourceRoot":"","sources":["../../src/extractor/babelParse.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,WAAW,MAAM,eAAe,CAAA;AAC5C,OAAO,KAAK,KAAK,CAAC,MAAM,cAAc,CAAA;AAiBtC,eAAO,MAAM,aAAa,EAAE,WAAW,CAAC,aAGtC,CAAA;AAIF,wBAAgB,UAAU,CAAC,IAAI,EAAE,MAAM,GAAG,MAAM,EAAE,QAAQ,CAAC,EAAE,MAAM,GAAG,CAAC,CAAC,IAAI,CAW3E"}

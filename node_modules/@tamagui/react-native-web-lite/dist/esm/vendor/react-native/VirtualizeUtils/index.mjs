@@ -1,0 +1,80 @@
+function elementsThatOverlapOffsets(offsets, props, getFrameMetrics, zoomScale = 1) {
+  const itemCount = props.getItemCount(props.data),
+    result = [];
+  for (let offsetIndex = 0; offsetIndex < offsets.length; offsetIndex++) {
+    const currentOffset = offsets[offsetIndex];
+    let left = 0,
+      right = itemCount - 1;
+    for (; left <= right;) {
+      const mid = left + (right - left >>> 1),
+        frame = getFrameMetrics(mid, props),
+        scaledOffsetStart = frame.offset * zoomScale,
+        scaledOffsetEnd = (frame.offset + frame.length) * zoomScale;
+      if (mid === 0 && currentOffset < scaledOffsetStart || mid !== 0 && currentOffset <= scaledOffsetStart) right = mid - 1;else if (currentOffset > scaledOffsetEnd) left = mid + 1;else {
+        result[offsetIndex] = mid;
+        break;
+      }
+    }
+  }
+  return result;
+}
+function newRangeCount(prev, next) {
+  return next.last - next.first + 1 - Math.max(0, 1 + Math.min(next.last, prev.last) - Math.max(next.first, prev.first));
+}
+function computeWindowedRenderLimits(props, maxToRenderPerBatch, windowSize, prev, getFrameMetricsApprox, scrollMetrics) {
+  const itemCount = props.getItemCount(props.data);
+  if (itemCount === 0) return {
+    first: 0,
+    last: -1
+  };
+  const {
+      offset,
+      velocity,
+      visibleLength,
+      zoomScale = 1
+    } = scrollMetrics,
+    visibleBegin = Math.max(0, offset),
+    visibleEnd = visibleBegin + visibleLength,
+    overscanLength = (windowSize - 1) * visibleLength,
+    leadFactor = 0.5,
+    fillPreference = velocity > 1 ? "after" : velocity < -1 ? "before" : "none",
+    overscanBegin = Math.max(0, visibleBegin - (1 - leadFactor) * overscanLength),
+    overscanEnd = Math.max(0, visibleEnd + leadFactor * overscanLength);
+  if (getFrameMetricsApprox(itemCount - 1, props).offset * zoomScale < overscanBegin) return {
+    first: Math.max(0, itemCount - 1 - maxToRenderPerBatch),
+    last: itemCount - 1
+  };
+  let [overscanFirst, first, last, overscanLast] = elementsThatOverlapOffsets([overscanBegin, visibleBegin, visibleEnd, overscanEnd], props, getFrameMetricsApprox, zoomScale);
+  overscanFirst = overscanFirst ?? 0, first = first ?? Math.max(0, overscanFirst), overscanLast = overscanLast ?? itemCount - 1, last = last ?? Math.min(overscanLast, first + maxToRenderPerBatch - 1);
+  const visible = {
+    first,
+    last
+  };
+  let newCellCount = newRangeCount(prev, visible);
+  for (; !(first <= overscanFirst && last >= overscanLast);) {
+    const maxNewCells = newCellCount >= maxToRenderPerBatch,
+      firstWillAddMore = first <= prev.first || first > prev.last,
+      firstShouldIncrement = first > overscanFirst && (!maxNewCells || !firstWillAddMore),
+      lastWillAddMore = last >= prev.last || last < prev.first,
+      lastShouldIncrement = last < overscanLast && (!maxNewCells || !lastWillAddMore);
+    if (maxNewCells && !firstShouldIncrement && !lastShouldIncrement) break;
+    firstShouldIncrement && !(fillPreference === "after" && lastShouldIncrement && lastWillAddMore) && (firstWillAddMore && newCellCount++, first--), lastShouldIncrement && !(fillPreference === "before" && firstShouldIncrement && firstWillAddMore) && (lastWillAddMore && newCellCount++, last++);
+  }
+  if (!(last >= first && first >= 0 && last < itemCount && first >= overscanFirst && last <= overscanLast && first <= visible.first && last >= visible.last)) throw new Error("Bad window calculation " + JSON.stringify({
+    first,
+    last,
+    itemCount,
+    overscanFirst,
+    overscanLast,
+    visible
+  }));
+  return {
+    first,
+    last
+  };
+}
+function keyExtractor(item, index) {
+  return typeof item == "object" && item?.key != null ? item.key : typeof item == "object" && item?.id != null ? item.id : String(index);
+}
+export { computeWindowedRenderLimits, elementsThatOverlapOffsets, keyExtractor, newRangeCount };
+//# sourceMappingURL=index.mjs.map

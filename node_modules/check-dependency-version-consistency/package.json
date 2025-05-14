@@ -1,0 +1,103 @@
+{
+  "name": "check-dependency-version-consistency",
+  "version": "4.1.1",
+  "description": "Ensures dependencies are on consistent versions across a monorepo.",
+  "keywords": [
+    "dependencies",
+    "linter",
+    "monorepo",
+    "nodejs",
+    "npm",
+    "package.json",
+    "packages",
+    "pnpm",
+    "workspace",
+    "yarn"
+  ],
+  "homepage": "https://github.com/bmish/check-dependency-version-consistency#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmish/check-dependency-version-consistency.git"
+  },
+  "license": "MIT",
+  "author": "Bryan Mishkin",
+  "type": "module",
+  "exports": "./dist/lib/index.js",
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
+  "bin": {
+    "check-dependency-version-consistency": "dist/bin/check-dependency-version-consistency.js"
+  },
+  "files": [
+    "dist/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc --project tsconfig.build.json",
+    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:*\"",
+    "lint:docs": "markdownlint \"**/*.md\"",
+    "lint:js": "eslint --cache .",
+    "lint:package-json": "npmPkgJsonLint .",
+    "lint:package-json-sorting": "sort-package-json --check",
+    "lint:package-json-sorting:fix": "sort-package-json package.json",
+    "lint:types": "tsc",
+    "prepublishOnly": "yarn build",
+    "release": "release-it",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --colors --coverage"
+  },
+  "dependencies": {
+    "@types/js-yaml": "^4.0.5",
+    "chalk": "^5.2.0",
+    "commander": "^11.0.0",
+    "edit-json-file": "^1.7.0",
+    "globby": "^13.1.4",
+    "js-yaml": "^4.1.0",
+    "semver": "^7.5.1",
+    "table": "^6.8.1",
+    "type-fest": "^4.30.0"
+  },
+  "devDependencies": {
+    "@release-it-plugins/lerna-changelog": "^5.0.0",
+    "@types/edit-json-file": "^1.7.0",
+    "@types/jest": "^29.5.1",
+    "@types/mock-fs": "^4.13.1",
+    "@types/node": "^22.10.1",
+    "@types/semver": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "eslint": "^8.41.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-square": "^25.0.0",
+    "jest": "^29.5.0",
+    "markdownlint-cli": "^0.35.0",
+    "mock-fs": "^5.4.1",
+    "npm-package-json-lint": "^6.4.0",
+    "npm-run-all": "^4.1.5",
+    "release-it": "^15.10.3",
+    "sort-package-json": "^2.4.1",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.4"
+  },
+  "engines": {
+    "node": "^16.0.0 || ^18.0.0 || >=20.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "@release-it-plugins/lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
+}

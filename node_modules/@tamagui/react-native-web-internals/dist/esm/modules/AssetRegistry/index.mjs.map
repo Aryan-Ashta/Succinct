@@ -1,0 +1,1 @@
+{"version":3,"names":["assets","registerAsset","asset","push","getAssetByID","assetId"],"sources":["../../../../src/modules/AssetRegistry/index.tsx"],"sourcesContent":[null],"mappings":"AAqBA,MAAMA,MAAA,GAA+B,EAAC;AAE/B,SAASC,cAAcC,KAAA,EAA8B;EAG1D,OAAOF,MAAA,CAAOG,IAAA,CAAKD,KAAK;AAC1B;AAEO,SAASE,aAAaC,OAAA,EAAgC;EAC3D,OAAOL,MAAA,CAAOK,OAAA,GAAU,CAAC;AAC3B","ignoreList":[]}
