@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet } from 'react-native';
-
+//page should be about settigns
+// baiscally just themes for now
 export default function Tab() {
   return (
     <View style={styles.container}>
-      <Text>Tab [Home|Settings]</Text>
+      
+
     </View>
   );
 }
