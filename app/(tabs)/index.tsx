@@ -3,7 +3,7 @@ import React from 'react';
 
 const Calendar = () => {
   return (
-    <CalendarContainer>
+    <CalendarContainer numberOfDays={7}>
       <CalendarHeader />
       <CalendarBody />
     </CalendarContainer>
