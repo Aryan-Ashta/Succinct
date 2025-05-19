@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+{/*import { View, Text, StyleSheet } from 'react-native';
 //here use ai to help break down the events
 //input shoudl be the task and return should be the breakdown of the task
 //should automatically add the task to the calendar
@@ -31,6 +31,33 @@ export default async function Planning() {
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}); */}
+import { View, Text, StyleSheet } from 'react-native';
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({ apiKey: "goog api key" });
+
+async function main() {
+  const response = await ai.models.generateContent({
+    model: "gemini-2.0-flash",
+    contents: "Explain how AI works in a few words",
+  });
+  return(response.text);
+}
+
+export default function aiView(){
+    
+        <View>
+            <Text>{main()}</Text>
+        </View>
+    return
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -18,6 +18,7 @@
     "@fullcalendar/interaction": "^6.1.17",
     "@fullcalendar/react": "^6.1.17",
     "@fullcalendar/timegrid": "^6.1.17",
+    "@google/genai": "^0.15.0",
     "@langchain/core": "^0.3.56",
     "@langchain/google-genai": "^0.2.9",
     "@react-navigation/bottom-tabs": "^7.3.10",
