@@ -1,31 +1,22 @@
-import { CalendarBody, CalendarContainer, CalendarHeader } from '@howljs/calendar-kit';
-import React from 'react';
+import FullCalendar from '@fullcalendar/react'
+import timeGridPlugin from '@fullcalendar/timegrid' // a plugin!
+import bootstrap5Plugin from '@fullcalendar/bootstrap5'
+//needs a way to add events manually
 
-//Should show events from plannin and should be able to add events manually
-const MyCalendar = () => {
-  const handleDragCreateStart = (start: any) => {
-    console.log("Started creating event at:", start);
-    // You can use this to show a UI indicator that event creation has started
-  };
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-  const handleDragCreateEnd = (event: any) => {
-    console.log("New event:", event);
-    // Here you would typically add the new event to your events array
-    // and possibly open a modal for the user to add more details
-    
-  };
-
+export default function Calendar() {
   return (
-    <CalendarContainer
-      allowDragToCreate={true}
-      onDragCreateEventStart={handleDragCreateStart}
-      onDragCreateEventEnd={handleDragCreateEnd}
-      // ... other props
-    >
-      <CalendarHeader />
-      <CalendarBody />
-    </CalendarContainer>
-  );
-};
-
-export default MyCalendar;
+    <FullCalendar
+        plugins={[ timeGridPlugin, bootstrap5Plugin]}
+        themeSystem='bootstrap5'
+      initialView="timeGridWeek"
+      nowIndicator={true}
+      events={[
+    { title: 'event 3', date: '2025-05-20' },
+    { title: 'event 2', date: '2025-05-20' }
+  ]}
+    />
+  )
+}
