@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 }); */}
-import { View, Text, StyleSheet } from 'react-native';
 import { GoogleGenAI } from "@google/genai";
+import { StyleSheet, Text, View } from 'react-native';
 
 const ai = new GoogleGenAI({ apiKey: "goog api key" });
 
