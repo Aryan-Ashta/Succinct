@@ -39,29 +39,29 @@ const styles = StyleSheet.create({
   },
 }); */}
 import { GoogleGenAI } from "@google/genai";
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Text, TextInput, View } from 'react-native';
 
-const ai = new GoogleGenAI({ apiKey: "goog api key" });
+export default function Planner = () => {
+  const [text, setText] = useState('');
+   async function AI() {
+    const key = process.env.GOOGLE_API_KEY;
+    const genai = new GoogleGenAI({
+      apiKey: key,
+    });
+    return (
+      <View style={{ padding: 10 }}>
+        <TextInput
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          placeholder="Enter your task"
+          value={text}
+          onChangeText={setText}
+        />
+        <Text style={{ marginTop: 10 }}>
+          {text}
+        </Text>
+      </View>
+    );
+  };
+};
 
-async function main() {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: "Explain how AI works in a few words",
-  });
-  return(response.text);
-}
-
-export default function aiView(){
-    
-        <View>
-            <Text>{main()}</Text>
-        </View>
-    return
-}
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

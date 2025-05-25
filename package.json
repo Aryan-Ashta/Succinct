@@ -57,7 +57,10 @@
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5",
     "tailwindcss": "^3.4.17",
-    "tslib": "^2.8.1"
+    "tslib": "^2.8.1",
+    "expo-camera": "~16.1.6",
+    "expo-contacts": "~14.2.4",
+    "expo-sensors": "~14.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
