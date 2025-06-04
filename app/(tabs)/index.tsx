@@ -28,6 +28,7 @@ function handleAddEvent() {
   }
 }
 export default function Calendar() {
+
 <Button
   onClick={handleAddEvent}
   variant="primary"
@@ -35,11 +36,11 @@ export default function Calendar() {
 >
   Add event
 </Button>
-  
+
   return (
     <FullCalendar
         plugins={[ timeGridPlugin, bootstrap5Plugin]}
-        themeSystem='bootstrap5'
+        themeSystem=''
       initialView="timeGridWeek"
       nowIndicator={true}
       events={[

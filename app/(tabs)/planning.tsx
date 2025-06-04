@@ -42,9 +42,9 @@ import { GoogleGenAI } from "@google/genai";
 import React, { useState } from 'react';
 import { Text, TextInput, View } from 'react-native';
 
-export default function Planner = () => {
+const Planner = () => {
   const [text, setText] = useState('');
-   async function AI() {
+  async function AI() {
     const key = process.env.GOOGLE_API_KEY;
     const genai = new GoogleGenAI({
       apiKey: key,
@@ -62,6 +62,8 @@ export default function Planner = () => {
         </Text>
       </View>
     );
-  };
+  }
 };
+
+export default Planner;
 
