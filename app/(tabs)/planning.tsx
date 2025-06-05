@@ -5,9 +5,10 @@ import Markdown from 'react-native-markdown-display';
 
 
 /*
-Features of long spanning projects:
-  deadline
-  name
+break current planning function into smaller components
+one function for initializing the ai 
+one function for calling gemini
+another for using the modal to collect api key and ui
 */
 function Planning() {
   
@@ -51,9 +52,12 @@ function Planning() {
       setInput('');
       setDeadline('');
       setTaskName('');
+      
       const text = result.text ?? '';
       console.log(text);
       setPromptResponses([...promptResponses, text]);
+      
+      
       setLoading(false);
     }
     catch(error){
@@ -63,7 +67,7 @@ function Planning() {
     }
   };
   return(
-  <ScrollView style={{ flex: 1, padding: 20 }}>
+  <ScrollView style={{ flex: 1, padding: 20, backgroundColor: 'fdfdfd' }} contentContainerStyle={{ flexGrow: 1 }}>
 <div className="container">
     <div className="row">
       <div className="col">
@@ -110,7 +114,14 @@ function Planning() {
       promptResponses.map((promptResponse, index) => (
         <div key={index} >
           <div className={`response-text ${index === promptResponses.length - 1 ? 'fw-bold' : ''}`}>
-            <Markdown>
+            <Markdown
+            style={{
+                body: {color: 'black', fontSize: 16},
+                heading1: {color: 'green'},
+                heading2: {color: 'green'},
+                code_block: {color: 'black', fontSize: 14}
+              }}
+            >
               {promptResponse}
             </Markdown>
             </div>
