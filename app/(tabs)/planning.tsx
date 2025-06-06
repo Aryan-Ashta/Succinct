@@ -1,7 +1,3 @@
-import { GoogleGenAI } from "@google/genai";
-import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
-import Markdown from 'react-native-markdown-display';
 
 
 /*
@@ -10,7 +6,9 @@ one function for initializing the ai
 one function for calling gemini
 another for using the modal to collect api key and ui
 */
-function Planning() {
+
+
+/*function Planning() {
   
   const [input, setInput] = useState('');
   const [deadline, setDeadline] = useState('');
@@ -136,4 +134,8 @@ function Planning() {
 
 }
 
-export default Planning;
+export default Planning;*/
+
+function llmInit(){
+  
+}
