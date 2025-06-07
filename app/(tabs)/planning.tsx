@@ -1,25 +1,87 @@
 
+import { storage } from '@/mmkv'; // Assuming you have a MMKV storage setup
+import { GoogleGenAI } from '@google/genai';
+import React, { useState } from 'react';
 
-/*
-break current planning function into smaller components
-one function for initializing the ai 
-one function for calling gemini
-another for using the modal to collect api key and ui
-*/
+/*const messages = [
+  {
+    role: "model",
+    content: ""
+  },
+  {
+    role: "user",
+    content: ""
+  }
+];*/
 
 
-/*function Planning() {
+const planProject = async (prompt: string, deadline: string, taskName: string) => {
+  const start = "How do I ";
+  const fullPrompt = start.concat(
+    prompt,
+    "? It needs to be completed by ",
+    deadline,
+    " (mm/dd/yyyy format) and the task name is ",
+    taskName
+  );
+  var plan = "";
+  const apiKey = storage.getString('apiKey');
+
+  const genAI = new GoogleGenAI({
+    apiKey: apiKey,
+  });
+  const response = await genAI.models.generateContentStream({
+    model: "gemini-2.5-flash-preview-05-20",
+    contents: fullPrompt,
+    config: {
+      maxOutputTokens: 1500,
+      temperature: 1.2,
+      systemInstruction: "You are a helpful assistant that helps users plan tasks and projects. You give defined dates and times for each task that needs to be done to achieve the project goal.",
+    }
+  })
+
+  for await (const chunk of response) {
+    console.log("Chunk received:", chunk.text);
+    if (chunk.text) {
+      plan += chunk.text;
+
+    } return plan;
+  }
+  /*const updatedMessages = [
+    ...messages,
+    { role: "user", content: fullPrompt }
+  ];
+
+  const chat = await genAI.chats.create({
+    model: "gemini-2.5-flash-preview-05-20",
+    config: {
+      systemInstruction: "You are a helpful assistant that helps users plan tasks and projects.  You give defined dates and times for each task what needs to be done to achieve the project goal.",
+      maxOutputTokens: 1500,
+      temperature: 1.2,
+    },
+    history: updatedMessages
+  });
+
+  const response = await chat.sendMessage({
+    message: fullPrompt
+  });
+  if (response.text) {
+  updatedMessages.push({ role: "model", content: response.text });
+  }
+  console.log("Response from Gemini:", response.text);*/
+};
+
+
+function Planning() {
   
-  const [input, setInput] = useState('');
+  
+
+  const [prompt, setPrompt] = useState('');
   const [deadline, setDeadline] = useState('');
   const [taskName, setTaskName] = useState('');
-  const [apiKey, setApiKey] = useState('');
-
-  const [promptResponses, setPromptResponses] = useState<string[]>([]);
-  const[loading, setLoading] = useState(false);
-
-  const handleInputChange = (text: { target: { value: React.SetStateAction<string>; }; }) => {
-    setInput(text.target.value);
+  
+  const handlePromptChange = (text: { target: { value: React.SetStateAction<string>; }; }) => {
+    setPrompt(text.target.value);
   };
   const handleDeadlineChange = (text: { target: { value: React.SetStateAction<string>; }; }) => {
     setDeadline(text.target.value);
@@ -27,115 +89,42 @@ another for using the modal to collect api key and ui
   const handleTaskNameChange = (text: { target: { value: React.SetStateAction<string>; }; }) => {
     setTaskName(text.target.value);
   };
-  const handleApiKeyChange = (text: { target: { value: React.SetStateAction<string>; }; }) => {
-    setApiKey(text.target.value);
-  };
   
- 
-  const genAI = new GoogleGenAI ({
-        apiKey: apiKey, 
 
-      })
-    
-  
-  const response = async() => {
-    try{
-      setLoading(true);
-      
-      setApiKey('');
-      const result = await genAI.models.generateContent({
-        model: "gemini-2.5-flash-preview-05-20",
-        contents: input.concat("It needs to be completed by ", deadline, " and the task name is ", taskName),
-      });
-      setInput('');
-      setDeadline('');
-      setTaskName('');
-      
-      const text = result.text ?? '';
-      console.log(text);
-      setPromptResponses([...promptResponses, text]);
-      
-      
-      setLoading(false);
-    }
-    catch(error){
-      console.log(error);
-      console.log("Error generating response");
-      setLoading(false);
-    }
-  };
-  return(
-  <ScrollView style={{ flex: 1, padding: 20, backgroundColor: 'fdfdfd' }} contentContainerStyle={{ flexGrow: 1 }}>
-<div className="container">
-    <div className="row">
-      <div className="col">
-        <input
-          type="text"
-          value={apiKey}
-          onChange={handleApiKeyChange}
-          placeholder="Enter your API Key"
-          className="form-control"
-        />    
-        <input
-          type="text"
-          value={input}
-          onChange={handleInputChange}
-          placeholder="Ask Me Something You Want"
-          className="form-control"
-        />
-        <input
-          type="text"
-          value={deadline}
-          onChange={handleDeadlineChange}
-          placeholder="Deadline (e.g., 2023-12-31)"
-          className="form-control"
-        />
-        <input
-          type="text"
-          value={taskName}
-          onChange={handleTaskNameChange}
-          placeholder="Task Name"
-          className="form-control"
-        />
-      </div>
-      <div className="col-auto">
-        <button onClick={response} className="btn btn-primary">Send</button>
+  return (
+    <div className="container">
+      <div className='row'>
+        <div className='col'>
+          <h1 className='text-center'>Planning</h1>
+          <p className='text-center'>Plan your projects and tasks with AI assistance.</p>
+            <input
+              type="text"
+              value={prompt}
+              onChange={handlePromptChange}
+              placeholder="How do I...?"
+              className="form-control"
+            />
+            <input
+              type="text"
+              value={deadline}
+              onChange={handleDeadlineChange}
+              placeholder="Deadline (mm/dd/yyyy)"
+              className="form-control"
+            />
+            <input
+              type="text"
+              value={taskName}
+              onChange={handleTaskNameChange}
+              placeholder="Task Name"
+              className="form-control"
+            />
+            <div className="col-auto">
+              <button onClick={() => {planProject(prompt, deadline, taskName)}} className="btn btn-primary">Send</button>
+            </div>
+           
+        </div>
       </div>
     </div>
-    {loading ? (
-      <div className="text-center mt-3">
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    ) : (
-      promptResponses.map((promptResponse, index) => (
-        <div key={index} >
-          <div className={`response-text ${index === promptResponses.length - 1 ? 'fw-bold' : ''}`}>
-            <Markdown
-            style={{
-                body: {color: 'black', fontSize: 16},
-                heading1: {color: 'green'},
-                heading2: {color: 'green'},
-                code_block: {color: 'black', fontSize: 14}
-              }}
-            >
-              {promptResponse}
-            </Markdown>
-            </div>
-        </div>
-      ))
-    )}
-  </div>
-</ScrollView>
-
-
   );
-
 }
-
-export default Planning;*/
-
-function llmInit(){
-  
-}
+export default Planning;

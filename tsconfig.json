@@ -1,14 +1,17 @@
 {
   "extends": "expo/tsconfig.base.json",
+  
   "compilerOptions": {
     "strict": true,
     "baseUrl": ".",
+    "target": "esnext",
+
     "paths": {
       "@/*": [
         "./*"
       ],
       "tslib" : ["path/to/node_modules/tslib/tslib.d.ts"]
-      
+    
     }
   },
   "include": [

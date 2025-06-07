@@ -1,9 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 //page should be about settigns
 // baiscally just themes for now
-import llmInit from '@/components/GeminiInit'; // Adjust the import path as necessary
+import { storage } from '@/mmkv';
 import { useState } from 'react';
-
 
 export default function Tab() {
   const [apiKey, setApiKey] = useState(''); 
@@ -14,6 +13,7 @@ export default function Tab() {
   
   return (
     <View style={styles.container}>
+      
       <input
         type="text"
         value={apiKey}
@@ -24,20 +24,21 @@ export default function Tab() {
         <button
           className='btn btn-primary'
           onClick={() => {
-            llmInit(apiKey); // Initialize the LLM with the API key
-            console.log('API Key submitted:', apiKey);
-             
+            storage.set('apiKey', apiKey);
+            console.log("API Key saved");
          }}>
             Submit
         </button>
+        
       </div>
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
   },
