@@ -1,1 +1,1 @@
-# App that takes big projects and makes it into smaller takss that are scheduled
+# App that takes big projects and makes it into smaller tasks that are scheduled
