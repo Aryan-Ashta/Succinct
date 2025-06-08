@@ -1,77 +1,180 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_ai/firebase_ai.dart';
 import 'firebase_options.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/': (context) => const CalendarRoute(),
+      '/second': (context) => const PlanningRoute(),
+      '/third': (context) => const SettingsRoute(),
+    },
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
+class CalendarRoute extends StatelessWidget {
+  const CalendarRoute({super.key});
+  
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Calendar'),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      body: Stack(
+        children: <Widget>[
+          Text(
+            'Calendar Route'
+            
+          ),
+          SfCalendar(
+            view: CalendarView.month,
+            monthViewSettings: MonthViewSettings(showAgenda: true),
+            allowDragAndDrop: true,
+            allowAppointmentResize: true,
+            allowViewNavigation: true,
+          )
+      ]),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              child: Text('Succinct', style: TextStyle(fontSize: 30)),
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_today),
+              title: const Text('Calendar'),
+              onTap: () {
+                Navigator.pushNamed(context, '/');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.route),
+              title: const Text('Planning'),
+              onTap: () {
+                Navigator.pushNamed(context, '/second');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.pushNamed(context, '/third');
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required String title});
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
 
-class _MyHomePageState extends State<MyHomePage> {
-  
+class PlanningRoute extends StatelessWidget {
+  const PlanningRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TableCalendar Example'),
+        title: const Text('Planning'),
       ),
-      body: TableCalendar(
-        firstDay: DateTime.utc(2010, 10, 16),
-        lastDay: DateTime.utc(2030, 3, 14),
-        focusedDay: DateTime.now(),
-        calendarFormat: CalendarFormat.month,
-        startingDayOfWeek: StartingDayOfWeek.monday,
-        daysOfWeekVisible: true,
-        headerStyle: const HeaderStyle(
-          formatButtonVisible: false,
-          titleCentered: true,
-          leftChevronVisible: true,
-          rightChevronVisible: true,
+      body: const Center(
+        child: Text(
+          'Planning Route',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        calendarStyle: const CalendarStyle(
-          todayDecoration: BoxDecoration(
-            color: Colors.blueAccent,
-            shape: BoxShape.circle,
-          ),
-          selectedDecoration: BoxDecoration(
-            color: Colors.deepPurple,
-            shape: BoxShape.circle,
-          ),
-          weekendTextStyle: TextStyle(color: Colors.red),
+
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              child: Text('Succinct', style: TextStyle(fontSize: 30)),
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_today),
+              title: const Text('Calendar'),
+              onTap: () {
+                Navigator.pushNamed(context, '/');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.route),
+              title: const Text('Planning'),
+              onTap: () {
+                Navigator.pushNamed(context, '/second');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.pushNamed(context, '/third');
+              },
+            ),
+          ],
         ),
-        onDaySelected: (selectedDay, focusedDay) {
-          // Handle day selection
-          
-        },
+      ),
+    );
+  }
+}
+
+class SettingsRoute extends StatelessWidget {
+  const SettingsRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+      ),
+      body: const Center(
+        child: Text(
+          'Settings Route',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              child: Text('Succinct', style: TextStyle(fontSize: 30)),
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_today),
+              title: const Text('Calendar'),
+              onTap: () {
+                Navigator.pushNamed(context, '/');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.route),
+              title: const Text('Planning'),
+              onTap: () {
+                Navigator.pushNamed(context, '/second');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.pushNamed(context, '/third');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
