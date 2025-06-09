@@ -41,6 +41,7 @@ dependencies:
   firebase_ai: ^2.0.0
   syncfusion_flutter_calendar: ^29.2.5
   firebase_auth: ^5.5.4
+  go_router: ^15.1.3
 
 
 
