@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
+//returns the credential from a new sign up given email and passwords
 Future<UserCredential> signUpWithEmail(email, password) async {
   try {
     final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
@@ -17,7 +17,7 @@ Future<UserCredential> signUpWithEmail(email, password) async {
     rethrow;
   }
 }
-
+//returns the credential from a sign in given email and passwords
 Future<UserCredential> signInWithEmail(email,password) async{
   try {
     final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
@@ -36,11 +36,8 @@ Future<UserCredential> signInWithEmail(email,password) async{
   }
 }
 
-Future<UserCredential> signInWithGoogle() async{
-  GoogleAuthProvider googleProvider = GoogleAuthProvider();
-  googleProvider.setCustomParameters({
-    'login-hint':'user@example.com'
-  });
-  return await FirebaseAuth.instance.signInWithPopup(googleProvider);
+//returns the user id as a string given the credential
+Future<String> returnUID(credential) async{
+  final user = credential.user;
+  return user?.uid;
 }
-

@@ -6,8 +6,8 @@ ChatSession chatInstance() {
   final chat = model.startChat();
   return chat;
 }
-
-Future<void> storeResponseStream(chatInstance, prompt, uid) async{
+//need to add stucuted json output based on syuncfusion calendar events
+Future<void> chatResponseStream(chatInstance, prompt, uid) async{
   final response = await chatInstance.sendMessage(prompt);
   CollectionReference promptResponses = FirebaseFirestore.instance.collection('promptRepsonses');
   int index=0;

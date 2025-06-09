@@ -12,7 +12,7 @@ class PlanningRoute extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Planning Route',
+          'Planning',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
 
