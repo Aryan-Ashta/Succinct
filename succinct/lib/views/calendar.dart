@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:succinct/viewmodels/calendarViewModel.dart';
 
 
 class CalendarRoute extends StatelessWidget {
@@ -17,13 +17,8 @@ class CalendarRoute extends StatelessWidget {
             'Calendar Route'
             
           ),
-          SfCalendar(
-            view: CalendarView.month,
-            monthViewSettings: MonthViewSettings(showAgenda: true),
-            allowDragAndDrop: true,
-            allowAppointmentResize: true,
-            allowViewNavigation: true,
-          )
+        calendar()
+          
       ]),
       drawer: Drawer(
               ),

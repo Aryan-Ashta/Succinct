@@ -10,12 +10,10 @@ class PlanningRoute extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Planning'),
       ),
-      body: const Center(
-        child: Text(
-          'Planning',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-
+      body: Stack(
+        children: [
+          
+        ],
       ),
       drawer: Drawer(
        

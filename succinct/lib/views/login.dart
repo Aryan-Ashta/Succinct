@@ -8,7 +8,7 @@ class LoginRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calendar'),
+        title: const Text('Login'),
       ),
       body: Stack(),
       drawer: Drawer(
