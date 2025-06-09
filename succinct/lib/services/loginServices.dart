@@ -43,3 +43,4 @@ Future<UserCredential> signInWithGoogle() async{
   });
   return await FirebaseAuth.instance.signInWithPopup(googleProvider);
 }
+
