@@ -24,3 +24,13 @@ Future<void> chatResponseStream(chatInstance, prompt, uid) async{
   }
 }
 
+Future<void> dechunkResponse(prompt, uid) async{
+  CollectionReference promptRepsonses = FirebaseFirestore.instance.collection('promptResponses');
+
+  return promptRepsonses.where('uid'==uid).where('prompt'==prompt).get()
+    .then((QuerySnapshot snapshot) {
+      snapshot.docs.forEach((doc) {
+        //add a piece that takes each prompt chunk, sorts them, puts them togeth in one completed repsonses doc and then deletes the original doc
+      });
+    });
+}

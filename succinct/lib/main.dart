@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:succinct/views/calendar.dart';
 import 'package:succinct/views/planning.dart';
 import 'package:succinct/views/settings.dart';
+import 'package:succinct/views/login.dart';
 import 'firebase_options.dart';
 import 'package:go_router/go_router.dart';
 
@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget{
     routes: [
       GoRoute(path: '/', builder:(context, state) => CalendarRoute(),),
       GoRoute(path: '/planning', builder:(context, state) => PlanningRoute(),),
-      GoRoute(path: '/settings', builder:(context, state) => SettingsRoute(),)
+      GoRoute(path: '/settings', builder:(context, state) => SettingsRoute(),),
+      GoRoute(path: '/login', builder: (context, state) => LoginRoute(),)
     ]
   );
   
