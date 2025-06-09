@@ -1,12 +1,12 @@
-import 'package:succinct/services/calendarServices.dart';
+import 'package:succinct/services/calendar_services.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:flutter/material.dart';
 
-SfCalendar calendar()  {
+Future<SfCalendar> calendar()  async{
   return SfCalendar(
     view: CalendarView.month,
     allowDragAndDrop: true,
-    dataSource: _getCalendarDataSource(Events().getEvents()),
+    dataSource:  await _getCalendarDataSource(Events().getEvents()),
     monthViewSettings: MonthViewSettings(
       showAgenda: true,
       dayFormat: 'EEE',
@@ -16,9 +16,18 @@ SfCalendar calendar()  {
   );
 }
 
-_AppointmentDataSource _getCalendarDataSource(appointments) {
-  
-  appointments.add(Appointment(
+Future<_AppointmentDataSource> _getCalendarDataSource(appointments) async{
+  List<Appointment> appointmentList = <Appointment>[];
+  List eventsList = await appointments.getEvents();
+  for (var event in eventsList){
+    appointmentList.add(Appointment(
+      subject: event.subject,
+      startTime: event.startTime, 
+      endTime: event.endTime,
+      color: event.colour,
+    ));
+  }
+  appointmentList.add(Appointment(
     startTime: DateTime.now(),
     endTime: DateTime.now().add(Duration(minutes: 10)),
     subject: 'Meeting',
@@ -27,7 +36,7 @@ _AppointmentDataSource _getCalendarDataSource(appointments) {
     endTimeZone: '',
   ));
 
-  return _AppointmentDataSource(appointments);
+  return Future<_AppointmentDataSource>(appointments);
 }
 
 class _AppointmentDataSource extends CalendarDataSource{
@@ -36,3 +45,4 @@ class _AppointmentDataSource extends CalendarDataSource{
   }
   
 }
+

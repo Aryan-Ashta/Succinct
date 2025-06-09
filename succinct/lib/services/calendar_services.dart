@@ -1,8 +1,6 @@
 //somthing to call the firesotre collection with calendarer events
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class Events {
   final String? subject;
@@ -48,24 +46,22 @@ class Events {
   }
 
   Future<List> getEvents() async{
-  final eventsRef = FirebaseFirestore.instance.collection("calendarEvents");
-  final query = eventsRef.where("uid", isEqualTo: uid);
-  final querySnapshot = await query.get();
-  var eventList = [];
+    final eventsRef = FirebaseFirestore.instance.collection("calendarEvents");
+    final query = eventsRef.where("uid", isEqualTo: uid);
+    final querySnapshot = await query.get();
+    var eventList = [];
   
-  for (var item in querySnapshot.docs){
-    final ref = FirebaseFirestore.instance.collection("calendarEvents").doc(item[0]).withConverter(
-      fromFirestore: Events.fromFirestore, 
-      toFirestore: (Events event, _) => event.toFirestore(),
-    );
-    final docSnap = await ref.get();
-    final event = docSnap.data();
-    eventList.add(event);
+    for (var item in querySnapshot.docs){
+      final ref = FirebaseFirestore.instance.collection("calendarEvents").doc(item[0]).withConverter(
+        fromFirestore: Events.fromFirestore, 
+        toFirestore: (Events event, _) => event.toFirestore(),
+      );
+      final docSnap = await ref.get();
+      final event = docSnap.data();
+      eventList.add(event);
   }
 
   return eventList;
   }
 }
-
-//function that converts events into appointmentsa
 

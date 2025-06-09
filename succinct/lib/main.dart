@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:succinct/views/calendar.dart';
-import 'package:succinct/views/planning.dart';
-import 'package:succinct/views/settings.dart';
-import 'package:succinct/views/login.dart';
+import 'package:succinct/views/calendar_view.dart';
+import 'package:succinct/views/planning_view.dart';
+import 'package:succinct/views/settings_view.dart';
+import 'package:succinct/views/login_view.dart';
 import 'firebase_options.dart';
 import 'package:go_router/go_router.dart';
 
