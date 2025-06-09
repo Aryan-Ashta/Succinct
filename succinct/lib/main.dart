@@ -11,17 +11,10 @@ Future<void> main() async {
   );
   
   
-  runApp(MaterialApp(
-    initialRoute: '/',
-    routes: {
-      '/': (context) => const CalendarRoute(),
-      '/second': (context) => const PlanningRoute(),
-      '/third': (context) => const SettingsRoute(),
-    },
-  ));
+  runApp(MaterialApp());
 }
 
-
+/*
 class CalendarRoute extends StatelessWidget {
   const CalendarRoute({super.key});
   
@@ -181,3 +174,4 @@ class SettingsRoute extends StatelessWidget {
     );
   }
 }
+*/
