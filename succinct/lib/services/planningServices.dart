@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_ai/firebase_ai.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -18,9 +20,9 @@ Future<void> chatResponseStream(chatInstance, prompt, uid) async{
       'prompt':prompt,
       'date': DateTime.now(),
       'chunkOfResponse':chunk,
-      'index':index
+      'index':index,
   })
-    .then((value) => print("response stored"));
+    .then((value) => log(''));
   }
 }
 
@@ -31,6 +33,8 @@ Future<void> dechunkResponse(prompt, uid) async{
     .then((QuerySnapshot snapshot) {
       snapshot.docs.forEach((doc) {
         //add a piece that takes each prompt chunk, sorts them, puts them togeth in one completed repsonses doc and then deletes the original doc
+        
       });
     });
 }
+
