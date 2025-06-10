@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 //returns the credential from a sign in given email and passwords
+//call this function in the login view
 Future<UserCredential> signInWithEmail(email,password,context) async{
   try {
     final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
@@ -71,9 +72,5 @@ Future<UserCredential> signInWithEmail(email,password,context) async{
   }
 }
 
-//returns the user id as a string given the credential
-Future<String?> returnUID(UserCredential credential) async{
-  final user = credential.user;
-  return user?.uid;
-}
+
 

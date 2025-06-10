@@ -80,6 +80,7 @@ class SignupRouteState extends State <SignupRoute> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       signUpWithEmail(_email, _password,context);
+                      context.go('/');
                     }
                   },
                   child: Text(
