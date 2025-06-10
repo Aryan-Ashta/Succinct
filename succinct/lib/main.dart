@@ -4,6 +4,7 @@ import 'package:succinct/views/calendar_view.dart';
 import 'package:succinct/views/planning_view.dart';
 import 'package:succinct/views/settings_view.dart';
 import 'package:succinct/views/login_view.dart';
+import 'package:succinct/views/signup_view.dart';
 import 'firebase_options.dart';
 import 'package:go_router/go_router.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget{
       GoRoute(path: '/planning', builder:(context, state) => PlanningRoute(),),
       GoRoute(path: '/settings', builder:(context, state) => SettingsRoute(),),
       GoRoute(path: '/login', builder: (context, state) => LoginRoute(),),
-      GoRoute(path: '/signup', builder: (context, state) => LoginRoute(),)
+      GoRoute(path: '/signup', builder: (context, state) => SignupRoute(),)
     ]
   );
   

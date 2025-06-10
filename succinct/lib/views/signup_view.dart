@@ -3,16 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:succinct/services/signup_services.dart';
 
 
-class LoginRoute extends StatefulWidget {
-  const LoginRoute({super.key});
+class SignupRoute extends StatefulWidget {
+  const SignupRoute({super.key});
   
   @override
-  LoginRouteState createState() {
-  return LoginRouteState();
+  SignupRouteState createState() {
+  return SignupRouteState();
   }
 }
 
-class LoginRouteState extends State <LoginRoute> {
+class SignupRouteState extends State <SignupRoute> {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
@@ -83,7 +83,7 @@ class LoginRouteState extends State <LoginRoute> {
                     }
                   },
                   child: Text(
-                    'Log in ',
+                    'Sign Up ',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
