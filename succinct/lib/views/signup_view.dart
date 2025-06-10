@@ -89,6 +89,26 @@ class LoginRouteState extends State <LoginRoute> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 90,
+              width: 360,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green.shade900,
+                    foregroundColor: Colors.green,
+                  ),
+                  onPressed: () {
+                    context.go('/login');
+                  },
+                  child: Text(
+                    'Have an account? Log In',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
