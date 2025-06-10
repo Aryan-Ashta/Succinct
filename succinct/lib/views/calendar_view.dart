@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:succinct/services/account_services.dart';
 import 'package:succinct/services/calendar_services.dart';
 import 'package:succinct/viewmodels/calendar_view_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-//rebuiild as a statful widget
 class CalendarRoute extends StatefulWidget{
   const CalendarRoute({super.key});
   
@@ -52,48 +52,59 @@ class CalendarRoute extends StatefulWidget{
         ],
       ),
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
           children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.green.shade900,
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  DrawerHeader(
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade900,
+                    ),
+                    child: Text(
+                      'Succinct',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.calendar_today),
+                    title: Text('Calendar'),
+                    onTap: () {
+                      context.go('/');
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.list),
+                    title: Text('Planning'),
+                    onTap: () {
+                      context.go('/planning');
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text('Settings'),
+                    onTap: () {
+                      context.go('/settings');
+                    },
+                  ),
+                ],
               ),
-              child: Text(
-                'Succinct',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child:Padding(
+                padding: EdgeInsets.all(16.0),
+                child:ElevatedButton(
+                  onPressed: () {
+                    signOut();
+                  }, 
+                  child: Text("Logout"),
                 ),
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.calendar_today),
-              title: Text('Calendar'),
-              onTap: () {
-                context.go('/');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.list),
-              title: Text('Planning'),
-              onTap: () {
-                context.go('/planning');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
-              onTap: () {
-                context.go('/settings');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.login),
-              title: Text('Account'),
-              onTap: () {
-                context.go('/login');
-              },
             ),
           ],
         ),

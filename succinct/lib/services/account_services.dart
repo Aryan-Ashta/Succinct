@@ -143,3 +143,25 @@ Future<UserCredential> signUpWithEmail(email, password, context) async {
   }
 }
 
+bool? isLoggedIn;
+
+authChangeListener(bool isLoggedIn) {
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user == null) {
+      isLoggedIn = false;
+      log('User is currently signed out!');
+    } else {
+      isLoggedIn = true;
+      log('User is signed in!');
+    }
+  });
+}
+
+Future<void> signOut() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    log('User signed out successfully');
+  } catch (e) {
+    log('Error signing out: $e');
+  }
+}
