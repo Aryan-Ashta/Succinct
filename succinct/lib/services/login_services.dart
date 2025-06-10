@@ -25,10 +25,44 @@ Future<UserCredential> signInWithEmail(email,password,context) async{
     );
     return credential;
   } on FirebaseAuthException catch (e) {
-    if (e.code == 'weak-password') {
-      log('Password is too weak');
-    } else if (e.code == 'email-already-in-use') {
-      log('An account already exists for this email');
+    if (e.code == 'user-not-found') {
+      log(e.code);
+      showDialog(
+        context: context, 
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: Text('Login Failed'),
+            content: Text('No user found for that email. Please sign up first.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        }
+      );
+    } else if (e.code == 'wrong-password') {
+      log('Wrong password provided for that user');
+      showDialog(
+        context: context, 
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: Text('Login Failed'),
+            content: Text('Wrong password provided for that user. Please try again.'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        }
+      );
     }
     rethrow;
   } catch (e) {
@@ -38,7 +72,7 @@ Future<UserCredential> signInWithEmail(email,password,context) async{
 }
 
 //returns the user id as a string given the credential
-Future<String> returnUID(credential) async{
+Future<String?> returnUID(UserCredential credential) async{
   final user = credential.user;
   return user?.uid;
 }
