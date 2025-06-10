@@ -63,5 +63,12 @@ class Events {
 
   return eventList;
   }
+
+  Future<void> addEvent(Events event) async {
+    final eventsRef = FirebaseFirestore.instance.collection("calendarEvents");
+    await eventsRef.add(event.toFirestore());
+  }
+
+  
 }
 

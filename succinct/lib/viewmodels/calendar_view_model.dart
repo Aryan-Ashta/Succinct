@@ -1,6 +1,5 @@
 
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:flutter/material.dart';
 //converts events from the events service to a calendar data source
 
 Future<AppointmentDataSource> getCalendarDataSource(appointments) async{
@@ -14,14 +13,6 @@ Future<AppointmentDataSource> getCalendarDataSource(appointments) async{
       color: event.colour,
     ));
   }
-  appointmentList.add(Appointment(
-    startTime: DateTime.now(),
-    endTime: DateTime.now().add(Duration(minutes: 10)),
-    subject: 'Meeting',
-    color: const Color.fromARGB(255, 255, 170, 0),
-    startTimeZone: '',
-    endTimeZone: '',
-  ));
 
   return Future<AppointmentDataSource>(appointments);
 }
