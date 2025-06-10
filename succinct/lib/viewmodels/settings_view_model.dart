@@ -1,0 +1,1 @@
+//manage the changes in the settings page

@@ -1,7 +1,7 @@
 
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:flutter/material.dart';
-
+//converts events from the events service to a calendar data source
 
 Future<AppointmentDataSource> getCalendarDataSource(appointments) async{
   List<Appointment> appointmentList = <Appointment>[];

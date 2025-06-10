@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//widgets that modify the settings of the app like theme and account settings
 class SettingsRoute extends StatelessWidget {
   const SettingsRoute({super.key});
 
