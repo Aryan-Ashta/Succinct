@@ -2,11 +2,6 @@
 //returns the user id as a string given the credential
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future<String?> returnUID(UserCredential credential) async{
-  final user = credential.user;
-  return user?.uid;
-}
-
 class AppUser {
   final String uid;
   final String email;

@@ -156,6 +156,18 @@ authChangeListener(bool isLoggedIn) {
     }
   });
 }
+String? userDataListener() {
+  String? userData;
+  
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user != null) {
+      userData = (user.uid);
+    } else {
+      log('No user is currently signed in.');
+    }
+  });
+  return userData;
+}
 
 Future<void> signOut() async {
   try {
@@ -165,3 +177,4 @@ Future<void> signOut() async {
     log('Error signing out: $e');
   }
 }
+
