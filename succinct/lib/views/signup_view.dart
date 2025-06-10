@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:succinct/services/login_services.dart';
+import 'package:succinct/services/signup_services.dart';
 
 
 class LoginRoute extends StatefulWidget {
@@ -22,7 +21,7 @@ class LoginRouteState extends State <LoginRoute> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("Signup"),
       ),
       body: Form(
         key: _formKey,
@@ -80,7 +79,7 @@ class LoginRouteState extends State <LoginRoute> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      signInWithEmail(_email, _password,context);
+                      signUpWithEmail(_email, _password,context);
                     }
                   },
                   child: Text(

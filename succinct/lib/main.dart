@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget{
       GoRoute(path: '/', builder:(context, state) => CalendarRoute(),),
       GoRoute(path: '/planning', builder:(context, state) => PlanningRoute(),),
       GoRoute(path: '/settings', builder:(context, state) => SettingsRoute(),),
-      GoRoute(path: '/login', builder: (context, state) => LoginRoute(),)
+      GoRoute(path: '/login', builder: (context, state) => LoginRoute(),),
+      GoRoute(path: '/signup', builder: (context, state) => LoginRoute(),)
     ]
   );
   
