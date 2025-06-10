@@ -31,10 +31,10 @@ Future<void> dechunkResponse(prompt, uid) async{
 
   return promptRepsonses.where('uid'==uid).where('prompt'==prompt).get()
     .then((QuerySnapshot snapshot) {
-      snapshot.docs.forEach((doc) {
+      for (var doc in snapshot.docs) {
         //add a piece that takes each prompt chunk, sorts them, puts them togeth in one completed repsonses doc and then deletes the original doc
-        
-      });
+        log(doc.toString());
+      }
     });
 }
 

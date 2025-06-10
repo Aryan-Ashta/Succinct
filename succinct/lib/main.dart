@@ -19,6 +19,8 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget{
+  MyApp({super.key});
+
   final GoRouter _router = GoRouter(
     routes: [
       GoRoute(path: '/', builder:(context, state) => CalendarRoute(),),

@@ -8,10 +8,10 @@ class CalendarRoute extends StatefulWidget{
   const CalendarRoute({super.key});
   
   @override
-  _CalendarRouteState createState() => _CalendarRouteState();
+  CalendarRouteState createState() => CalendarRouteState();
 }
 
-  class _CalendarRouteState extends State<CalendarRoute>{
+  class CalendarRouteState extends State<CalendarRoute>{
     late Future<AppointmentDataSource> _bar;
     Future<List> calendar = Events().getEvents();
 
@@ -40,7 +40,7 @@ class CalendarRoute extends StatefulWidget{
                   dataSource: snapshot.data,
                   monthViewSettings: MonthViewSettings(
                     showAgenda: true,
-                    agendaViewHeight: 400,
+                    agendaViewHeight: 45,
                     dayFormat: 'EEE',
                     
                   ),
