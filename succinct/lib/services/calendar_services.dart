@@ -1,6 +1,7 @@
 //somthing to call the firesotre collection with calendarer events
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:succinct/services/account_services.dart';
 
 class Events {
   final String? subject;
@@ -45,30 +46,34 @@ class Events {
     };
   }
 
-  Future<List> getEvents() async{
-    final eventsRef = FirebaseFirestore.instance.collection("calendarEvents");
-    final query = eventsRef.where("uid", isEqualTo: uid);
-    final querySnapshot = await query.get();
-    var eventList = [];
   
-    for (var item in querySnapshot.docs){
-      final ref = FirebaseFirestore.instance.collection("calendarEvents").doc(item[0]).withConverter(
-        fromFirestore: Events.fromFirestore, 
-        toFirestore: (Events event, _) => event.toFirestore(),
-      );
-      final docSnap = await ref.get();
-      final event = docSnap.data();
-      eventList.add(event);
-  }
-
-  return eventList;
-  }
-
-  Future<void> addEvent(Events event) async {
+}
+//adds an event to firestore
+Future<void> addEvent(Events event) async {
     final eventsRef = FirebaseFirestore.instance.collection("calendarEvents");
     await eventsRef.add(event.toFirestore());
   }
 
+Future<List> getEvents(Events event) async{
+  String? uid;
+  final stream = userDataListener();
+  await for (final value in stream){
+    uid = value;
+  }
+  final eventsRef = FirebaseFirestore.instance.collection("calendarEvents");
+  final query = eventsRef.where("uid", isEqualTo: uid);
+  final querySnapshot = await query.get();
+  var eventList = [];
   
-}
+  for (var item in querySnapshot.docs){
+    final ref = FirebaseFirestore.instance.collection("calendarEvents").doc(item[0]).withConverter(
+      fromFirestore: Events.fromFirestore, 
+      toFirestore: (Events event, _) => event.toFirestore(),
+    );
+    final docSnap = await ref.get();
+    final event = docSnap.data();
+    eventList.add(event);
+  }
 
+  return eventList;
+} 

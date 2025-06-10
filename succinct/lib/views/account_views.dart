@@ -21,9 +21,6 @@ class LoginRouteState extends State <LoginRoute> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
       body: Form(
         key: _formKey,
         child: Column(
@@ -81,6 +78,7 @@ class LoginRouteState extends State <LoginRoute> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       signInWithEmail(_email, _password,context);
+                      context.go('/');
                     }
                   },
                   child: Text(
@@ -192,9 +190,6 @@ class SignupRouteState extends State <SignupRoute> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Signup"),
-      ),
       body: Form(
         key: _formKey,
         child: Column(

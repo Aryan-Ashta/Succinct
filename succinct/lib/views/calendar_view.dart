@@ -12,9 +12,10 @@ class CalendarRoute extends StatefulWidget{
   CalendarRouteState createState() => CalendarRouteState();
 }
 
-  class CalendarRouteState extends State<CalendarRoute>{
-    late Future<AppointmentDataSource> _bar;
-    Future<List> calendar = Events().getEvents();
+class CalendarRouteState extends State<CalendarRoute>{
+  late Future<AppointmentDataSource> _bar;
+  Future<List> calendar = getEvents(Events());
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -24,11 +25,20 @@ class CalendarRoute extends StatefulWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Calendar"),
-      ),
+      key:_scaffoldKey,
       body: Column(
         children: <Widget>[
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                }, 
+                icon: Icon(Icons.menu)
+              ),
+              Text("Calendar", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            ],
+          ),
           FutureBuilder(
             future: _bar, 
             builder: (BuildContext context, snapshot) {
