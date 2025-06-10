@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 //returns the credential from a new sign up given email and passwords
 Future<UserCredential> signUpWithEmail(email, password) async {
   try {
@@ -19,10 +20,27 @@ Future<UserCredential> signUpWithEmail(email, password) async {
   }
 }
 //returns the credential from a sign in given email and passwords
-Future<UserCredential> signInWithEmail(email,password) async{
+Future<UserCredential> signInWithEmail(email,password,context) async{
   try {
     final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     log('Signup Completed');
+    showDialog(
+      context: context, 
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Login Successful'),
+          content: Text('Welcome back!'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
     return credential;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {

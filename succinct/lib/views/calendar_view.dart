@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:succinct/services/calendar_services.dart';
 import 'package:succinct/viewmodels/calendar_view_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -51,7 +52,51 @@ class CalendarRoute extends StatefulWidget{
         ],
       ),
       drawer: Drawer(
-
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green.shade900,
+              ),
+              child: Text(
+                'Succinct',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text('Calendar'),
+              onTap: () {
+                context.go('/');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.list),
+              title: Text('Planning'),
+              onTap: () {
+                context.go('/planning');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                context.go('/settings');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.login),
+              title: Text('Login'),
+              onTap: () {
+                context.go('/login');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
