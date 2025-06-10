@@ -2,18 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:succinct/services/account_services.dart';
 //widgets that modify the settings of the app like theme and account settings
-class SettingsRoute extends StatelessWidget {
-  const SettingsRoute({super.key});
 
+
+class SettingsRoute extends StatefulWidget{
+  const SettingsRoute({super.key});
+  
+  @override
+  SettingsRouteState createState() => SettingsRouteState();
+}
+
+class SettingsRouteState extends State<SettingsRoute> {
+final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    
-      body: const Center(
-        child: Text(
-          'Settings Route',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
+      key: _scaffoldKey,
+      body: Stack(
+        children: [
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                }, 
+                icon: Icon(Icons.menu)
+              ),
+              Text("Settings", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            ]
+          ),
+          // Add your settings content here
+          Center(child: Text("Settings Content Here")),
+        ],
       ),
       drawer: Drawer(
         child: Column(
