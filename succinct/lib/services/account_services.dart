@@ -157,7 +157,7 @@ Stream<void> authChangeListener(isLoggedIn) {
     return;
   });
 }
-Stream<String?> userDataListener() {//returns uid as a stream
+Stream<String> userDataListener() {//returns uid as a stream
   String? userData;
   
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
@@ -167,7 +167,7 @@ Stream<String?> userDataListener() {//returns uid as a stream
       log('No user is currently signed in.');
     }
   });
-  return Stream<String?>.value(userData);
+  return Stream<String>.value(userData!);
 }
 
 Future<void> signOut() async {

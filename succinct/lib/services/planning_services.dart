@@ -3,16 +3,15 @@ import 'dart:developer';
 import 'package:firebase_ai/firebase_ai.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-ChatSession chatInstance() {
+GenerativeModel geminiInstance() {
   final model = FirebaseAI.googleAI().generativeModel(model: 'gemini-2.0-flash');
-  final chat = model.startChat();
-  return chat;
+  return model;
 }
 
 bool? isDone;
 //need to add stucuted json output based on syuncfusion calendar events
-Stream<String> chatResponseStream(chatInstance, prompt, uid, chunks, isDone) async*{
-  final response = await chatInstance.sendMessage(prompt);
+Stream<String> chatResponseStream(model, prompt, uid,  isDone) async*{
+  final response = await model.generateContentStream(prompt);
   String chunks = '';
   CollectionReference promptResponses = FirebaseFirestore.instance.collection('promptRepsonses');
   int index=0;
@@ -37,7 +36,6 @@ String dechunkResponse(prompt, uid) {
   String response = '';
 
   CollectionReference promptRepsonses = FirebaseFirestore.instance.collection('promptResponses');
-
   promptRepsonses
     .where('uid'==uid)
     .where('prompt'==prompt)
