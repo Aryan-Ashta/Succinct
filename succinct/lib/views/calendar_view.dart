@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:succinct/services/account_services.dart';
-import 'package:succinct/services/calendar_services.dart';
 import 'package:succinct/viewmodels/calendar_view_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -14,13 +13,12 @@ class CalendarRoute extends StatefulWidget{
 
 class CalendarRouteState extends State<CalendarRoute>{
   late Future<AppointmentDataSource> _bar;
-  Future<List> calendar = getEvents(Events());
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _bar = getCalendarDataSource(calendar);
+    _bar = getCalendarDataSource();
   }
   @override
   Widget build(BuildContext context){
@@ -45,16 +43,15 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
               if(snapshot.connectionState == ConnectionState.waiting){
                 return Text("Calendar Loading");
               } else{
-                return SfCalendar(
-                  view: CalendarView.month,
-                  allowDragAndDrop: true,
-                  dataSource: snapshot.data,
-                  monthViewSettings: MonthViewSettings(
-                    showAgenda: true,
-                    agendaViewHeight: 45,
-                    dayFormat: 'EEE',
-                    
+                return Expanded(
+                  child: SfCalendar(
+                    view: CalendarView.month,
+                    allowDragAndDrop: true,
+                    dataSource: snapshot.data,
+                    monthViewSettings: MonthViewSettings(
+                      showAgenda: true,                    
                   ),
+                )
                 );
               }
             },

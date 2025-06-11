@@ -16,4 +16,5 @@ class AppUser {
       displayName: user.displayName ?? '',
     );
   }
+  
 }

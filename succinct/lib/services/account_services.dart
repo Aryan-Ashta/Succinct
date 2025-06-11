@@ -144,16 +144,17 @@ Future<UserCredential> signUpWithEmail(email, password, context) async {
 }
 
 bool? isLoggedIn;
-
-authChangeListener(bool isLoggedIn) {
-  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+Stream<void> authChangeListener(isLoggedIn) {
+  return FirebaseAuth.instance.authStateChanges().map((User? user) {
     if (user == null) {
-      isLoggedIn = false;
+      isLoggedIn = Stream<bool?>.value(false);
       log('User is currently signed out!');
     } else {
-      isLoggedIn = true;
+      isLoggedIn = Stream<bool?>.value(false);
       log('User is signed in!');
     }
+    // Return null since Stream<void>
+    return;
   });
 }
 Stream<String?> userDataListener() {
