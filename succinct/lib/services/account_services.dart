@@ -157,7 +157,7 @@ Stream<void> authChangeListener(isLoggedIn) {
     return;
   });
 }
-Stream<String?> userDataListener() {
+Stream<String?> userDataListener() {//returns uid as a stream
   String? userData;
   
   FirebaseAuth.instance.authStateChanges().listen((User? user) {

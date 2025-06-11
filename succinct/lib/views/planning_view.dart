@@ -31,6 +31,8 @@ class PlanningRouteState extends State<PlanningRoute> {
               Text("Planning", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             ]
           ),
+          // list of chats
+          // clicking on a chat will open the chat view
         ],
       ),
       drawer: Drawer(

@@ -8,11 +8,12 @@ ChatSession chatInstance() {
   final chat = model.startChat();
   return chat;
 }
-String chunks = '';
+
+bool? isDone;
 //need to add stucuted json output based on syuncfusion calendar events
-Stream<String> chatResponseStream(chatInstance, prompt, uid, chunks) async*{
+Stream<String> chatResponseStream(chatInstance, prompt, uid, chunks, isDone) async*{
   final response = await chatInstance.sendMessage(prompt);
-  
+  String chunks = '';
   CollectionReference promptResponses = FirebaseFirestore.instance.collection('promptRepsonses');
   int index=0;
   await for (final chunk in response){
@@ -28,6 +29,7 @@ Stream<String> chatResponseStream(chatInstance, prompt, uid, chunks) async*{
     .then((value) => log(''));
     yield chunks;
   }
+  isDone = true;
 }
 
 Future<String> dechunkResponse(prompt, uid) async{
@@ -50,3 +52,4 @@ Future<String> dechunkResponse(prompt, uid) async{
   return response;
 }
 
+//when the user creates a new chatResponseStream, it should swap chunks for response using isDone to check
