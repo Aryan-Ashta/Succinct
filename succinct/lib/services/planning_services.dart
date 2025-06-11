@@ -8,14 +8,17 @@ ChatSession chatInstance() {
   final chat = model.startChat();
   return chat;
 }
+String chunks = '';
 //need to add stucuted json output based on syuncfusion calendar events
-Future<void> chatResponseStream(chatInstance, prompt, uid) async{
+Stream<String> chatResponseStream(chatInstance, prompt, uid, chunks) async*{
   final response = await chatInstance.sendMessage(prompt);
+  
   CollectionReference promptResponses = FirebaseFirestore.instance.collection('promptRepsonses');
   int index=0;
   await for (final chunk in response){
     index++;
-    return promptResponses.add({
+    chunks = chunks + chunk;
+    promptResponses.add({
       'uid': uid,
       'prompt':prompt,
       'date': DateTime.now(),
@@ -23,18 +26,27 @@ Future<void> chatResponseStream(chatInstance, prompt, uid) async{
       'index':index,
   })
     .then((value) => log(''));
+    yield chunks;
   }
 }
 
-Future<void> dechunkResponse(prompt, uid) async{
+Future<String> dechunkResponse(prompt, uid) async{
+  
+  String response = '';
+
   CollectionReference promptRepsonses = FirebaseFirestore.instance.collection('promptResponses');
 
-  return promptRepsonses.where('uid'==uid).where('prompt'==prompt).get()
+  promptRepsonses
+    .where('uid'==uid)
+    .where('prompt'==prompt)
+    .orderBy('index')
+    .get()
     .then((QuerySnapshot snapshot) {
       for (var doc in snapshot.docs) {
-        //add a piece that takes each prompt chunk, sorts them, puts them togeth in one completed repsonses doc and then deletes the original doc
+        response = response + doc['chunkOfResponse'];
         log(doc.toString());
       }
     });
+  return response;
 }
 
