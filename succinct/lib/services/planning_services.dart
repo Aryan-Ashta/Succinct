@@ -32,7 +32,7 @@ Stream<String> chatResponseStream(chatInstance, prompt, uid, chunks, isDone) asy
   isDone = true;
 }
 
-Future<String> dechunkResponse(prompt, uid) async{
+String dechunkResponse(prompt, uid) {
   
   String response = '';
 
@@ -53,3 +53,10 @@ Future<String> dechunkResponse(prompt, uid) async{
 }
 
 //when the user creates a new chatResponseStream, it should swap chunks for response using isDone to check
+String swapResponse(isDone, prompt, uid){
+  if (isDone == true) {
+    return dechunkResponse(prompt, uid);
+  } else {
+    return '';
+  }
+}
