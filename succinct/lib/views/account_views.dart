@@ -27,6 +27,14 @@ class LoginRouteState extends State <LoginRoute> {
           children:<Widget>[
             Padding(
               padding: EdgeInsets.only(left:15.0, right: 15.0, top: 15.0, bottom: 15.0),
+              child: Text(
+                'Log In',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+              
+            ),
+            Padding(
+              padding: EdgeInsets.only(left:15.0, right: 15.0, top: 15.0, bottom: 15.0),
               child:TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -111,64 +119,6 @@ class LoginRouteState extends State <LoginRoute> {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: Colors.green.shade900,
-                    ),
-                    child: Text(
-                      'Succinct',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.calendar_today),
-                    title: Text('Calendar'),
-                    onTap: () {
-                      context.go('/');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.list),
-                    title: Text('Planning'),
-                    onTap: () {
-                      context.go('/planning');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text('Settings'),
-                    onTap: () {
-                      context.go('/settings');
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child:Padding(
-                padding: EdgeInsets.all(16.0),
-                child:ElevatedButton(
-                  onPressed: () {
-                    signOut();
-                  }, 
-                  child: Text("Logout"),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -194,6 +144,13 @@ class SignupRouteState extends State <SignupRoute> {
         key: _formKey,
         child: Column(
           children:<Widget>[
+            Padding(
+              padding: EdgeInsets.only(left:15.0, right: 15.0, top: 15.0, bottom: 15.0),
+              child:Text(
+                'Sign Up',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+            ),
             Padding(
               padding: EdgeInsets.only(left:15.0, right: 15.0, top: 15.0, bottom: 15.0),
               child:TextFormField(
@@ -274,64 +231,6 @@ class SignupRouteState extends State <SignupRoute> {
                     'Have an account? Log In',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: <Widget>[
-                  DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: Colors.green.shade900,
-                    ),
-                    child: Text(
-                      'Succinct',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.calendar_today),
-                    title: Text('Calendar'),
-                    onTap: () {
-                      context.go('/');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.list),
-                    title: Text('Planning'),
-                    onTap: () {
-                      context.go('/planning');
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text('Settings'),
-                    onTap: () {
-                      context.go('/settings');
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              alignment: Alignment.bottomCenter,
-              child:Padding(
-                padding: EdgeInsets.all(16.0),
-                child:ElevatedButton(
-                  onPressed: () {
-                    signOut();
-                  }, 
-                  child: Text("Logout"),
                 ),
               ),
             ),

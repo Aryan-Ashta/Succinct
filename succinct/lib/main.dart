@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:succinct/services/account_services.dart';
@@ -23,11 +24,52 @@ class MyApp extends StatelessWidget{
   
   final GoRouter _router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder:(context, state) => CalendarRoute(),),
-      GoRoute(path: '/planning', builder:(context, state) => PlanningRoute(),),
-      GoRoute(path: '/settings', builder:(context, state) => SettingsRoute(),),
-      GoRoute(path: '/login', builder: (context, state) => LoginRoute(),),
-      GoRoute(path: '/signup', builder: (context, state) => SignupRoute(),)
+      GoRoute(
+        path: '/', 
+        pageBuilder: (context, state) {
+          return NoTransitionPage(
+            key: state.pageKey,
+            child: CalendarRoute()
+          );
+        } ,
+      ),
+      
+      GoRoute(
+        path: '/planning', 
+        pageBuilder: (context, state) {
+          return NoTransitionPage(
+            key: state.pageKey,
+            child: PlanningRoute()
+          );
+        } ,
+      ),
+      GoRoute(
+        path: '/settings', 
+        pageBuilder: (context, state) {
+          return NoTransitionPage(
+            key: state.pageKey,
+            child: SettingsRoute()
+          );
+        } ,
+      ),
+      GoRoute(
+        path: '/login', 
+        pageBuilder: (context, state) {
+          return NoTransitionPage(
+            key: state.pageKey,
+            child: LoginRoute()
+          );
+        } ,
+      ),
+      GoRoute(
+        path: '/signup', 
+        pageBuilder: (context, state) {
+          return NoTransitionPage(
+            key: state.pageKey,
+            child: SignupRoute()
+          );
+        } ,
+      ),
     ]
   );
   
